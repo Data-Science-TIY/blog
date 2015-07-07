@@ -1,64 +1,29 @@
-<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/" version="2.0"><channel><title>Durham TIY Data Science Team</title><description>Thoughts, stories and ideas.</description><link>http://localhost:2368/</link><generator>Ghost 0.6</generator><lastBuildDate>Mon, 06 Jul 2015 14:44:42 GMT</lastBuildDate><atom:link href="http://localhost:2368/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title>Welcome to Ghost</title><description>&lt;p&gt;You're live! Nice. We've put together a little post to introduce you to the Ghost editor and get you started. You can manage your content by signing in to the admin area at &lt;code&gt;&amp;lt;your blog URL&amp;gt;/ghost/&lt;/code&gt;. When you arrive, you can select this post from a list&lt;/p&gt;</description><link>http://localhost:2368/welcome-to-ghost/</link><guid isPermaLink="false">de425924-2474-479b-bc08-6955607c2fa7</guid><category>Getting Started</category><dc:creator>Mark Harper</dc:creator><pubDate>Mon, 06 Jul 2015 14:20:13 GMT</pubDate><content:encoded>&lt;p&gt;You're live! Nice. We've put together a little post to introduce you to the Ghost editor and get you started. You can manage your content by signing in to the admin area at &lt;code&gt;&amp;lt;your blog URL&amp;gt;/ghost/&lt;/code&gt;. When you arrive, you can select this post from a list on the left and see a preview of it on the right. Click the little pencil icon at the top of the preview to edit this post and read the next section!&lt;/p&gt;
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/" version="2.0"><channel><title>Durham TIY Data Science Team</title><description>A Kaggle competition entry by students from The Iron Yard Academy in Durham, NC.</description><link>http://localhost:2368/</link><generator>Ghost 0.6</generator><lastBuildDate>Tue, 07 Jul 2015 06:18:39 GMT</lastBuildDate><atom:link href="http://localhost:2368/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title>Data Visualization - Day One</title><description>&lt;p&gt;Today, I focused primarily on preparing the front end structure of this project. &lt;/p&gt;
 
-&lt;h2 id="gettingstarted"&gt;Getting Started&lt;/h2&gt;
+&lt;p&gt;To start, I setup this blog to track our daily progress. It is built on the node-based blogging platform &lt;a href="http://localhost:2368/data-visualization-day-one/ghost.org"&gt;Ghost.io&lt;/a&gt; and hosted on Github via a static page generator, &lt;a href="https://github.com/axitkhurana/buster"&gt;Buster&lt;/a&gt;.&lt;/p&gt;
 
-&lt;p&gt;Ghost uses something called Markdown for writing. Essentially, it's a shorthand way to manage your post formatting as you write!&lt;/p&gt;
+&lt;p&gt;The next step was to explore&lt;/p&gt;</description><link>http://localhost:2368/data-visualization-day-one/</link><guid isPermaLink="false">db7feddd-51ae-48da-9857-d8fd6db5e553</guid><dc:creator>Mark Harper</dc:creator><pubDate>Tue, 07 Jul 2015 05:16:05 GMT</pubDate><content:encoded>&lt;p&gt;Today, I focused primarily on preparing the front end structure of this project. &lt;/p&gt;
 
-&lt;p&gt;Writing in Markdown is really easy. In the left hand panel of Ghost, you simply write as you normally would. Where appropriate, you can use &lt;em&gt;shortcuts&lt;/em&gt; to &lt;strong&gt;style&lt;/strong&gt; your content. For example, a list:&lt;/p&gt;
+&lt;p&gt;To start, I setup this blog to track our daily progress. It is built on the node-based blogging platform &lt;a href="http://localhost:2368/data-visualization-day-one/ghost.org"&gt;Ghost.io&lt;/a&gt; and hosted on Github via a static page generator, &lt;a href="https://github.com/axitkhurana/buster"&gt;Buster&lt;/a&gt;.&lt;/p&gt;
 
-&lt;ul&gt;
-&lt;li&gt;Item number one&lt;/li&gt;
-&lt;li&gt;Item number two
-&lt;ul&gt;&lt;li&gt;A nested item&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;A final item&lt;/li&gt;
-&lt;/ul&gt;
+&lt;p&gt;The next step was to explore the javascript data visualization library &lt;a href="http://localhost:2368/data-visualization-day-one/d3js.org"&gt;D3 JS&lt;/a&gt;. I started by importing a dataset that Josh provided. This dataset shows the frequency of operating systems used in the user population from the &lt;a href="http://localhost:2368/data-visualization-day-one/kaggle.com/c/icdm-2015-drawbridge-cross-device-connections"&gt;Kaggle Competition&lt;/a&gt;. The biggest challenge that I encountered in visualizing the data was choosing how to best reorganize the dataset to easily build a bar chart in D3. I found that building a bar chart was easiest when each entry was formatted as a JSON object with an id and frequency. &lt;/p&gt;
 
-&lt;p&gt;or with numbers!&lt;/p&gt;
+&lt;p&gt;There are a few remaining problems with the bar chart as it stands now. It is not responsive, it cuts off entries beyond 56, it lacks a color gradient, and it is not interactive. The above features are all things that I am going to implement prior to demo day. So much left to do in the days to come. Check out the bar chart below!&lt;/p&gt;
 
-&lt;ol&gt;
-&lt;li&gt;Remember to buy some milk  &lt;/li&gt;
-&lt;li&gt;Drink the milk  &lt;/li&gt;
-&lt;li&gt;Tweet that I remembered to buy the milk, and drank it&lt;/li&gt;
-&lt;/ol&gt;
+&lt;div class="os-chart"&gt;&lt;/div&gt;</content:encoded></item><item><title>Data Analysis - Day One</title><description>&lt;p&gt;Today was a day to further explore the data and test out some initial ideas.&lt;/p&gt;
 
-&lt;h3 id="links"&gt;Links&lt;/h3&gt;
+&lt;p&gt;We encountered a few problems that will help us define the next steps for analysis.&lt;/p&gt;
 
-&lt;p&gt;Want to link to a source? No problem. If you paste in a URL, like &lt;a href="http://ghost.org"&gt;http://ghost.org&lt;/a&gt; - it'll automatically be linked up. But if you want to customise your anchor text, you can do that too! Here's a link to &lt;a href="http://ghost.org"&gt;the Ghost website&lt;/a&gt;. Neat.&lt;/p&gt;
+&lt;p&gt;Our first task, as always, is to define our problem.  We can view this as a similarity matching problem.  In&lt;/p&gt;</description><link>http://localhost:2368/data-analysis-day-one/</link><guid isPermaLink="false">7c22130d-5b12-4b5c-87ca-6017f9253295</guid><dc:creator>Mark Harper</dc:creator><pubDate>Tue, 07 Jul 2015 03:15:05 GMT</pubDate><content:encoded>&lt;p&gt;Today was a day to further explore the data and test out some initial ideas.&lt;/p&gt;
 
-&lt;h3 id="whataboutimages"&gt;What about Images?&lt;/h3&gt;
+&lt;p&gt;We encountered a few problems that will help us define the next steps for analysis.&lt;/p&gt;
 
-&lt;p&gt;Images work too! Already know the URL of the image you want to include in your article? Simply paste it in like this to make it show up:&lt;/p&gt;
+&lt;p&gt;Our first task, as always, is to define our problem.  We can view this as a similarity matching problem.  In many ways it is like our movie review recommendation project.  &lt;a href="https://github.com/tiyd-python-2015-05/movie-recommendations"&gt;https://github.com/tiyd-python-2015-05/movie-recommendations&lt;/a&gt;  We can vectorize the shared characteristics of the devices and the cookies and use cosine similarity to score their similarity.  Hopefully the similarity will give us decent predictions.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src="https://ghost.org/images/ghost.png" alt="The Ghost Logo"&gt;&lt;/p&gt;
+&lt;p&gt;One roadblock is categorical data.  To properly vectorize this type of data we have to make a dummy column for each possible categorical value.  In the case of IP address and some of the anonymous categorical data where there can be thousands of different matches, this has hindered our progress.&lt;/p&gt;
 
-&lt;p&gt;Not sure which image you want to use yet? That's ok too. Leave yourself a descriptive placeholder and keep writing. Come back later and drag and drop the image in to upload:&lt;/p&gt;
+&lt;p&gt;Headway was made when doing similarity scores based on country code and numerical data.  Our first attempts can be seen in this IPython Notebook: &lt;a href="https://github.com/Data-Science-TIY/data-science/blob/master/Make%20Cookie%20Dummies.ipynb"&gt;https://github.com/Data-Science-TIY/data-science/blob/master/Make%20Cookie%20Dummies.ipynb&lt;/a&gt;.  Our first test prediction matched a phone and device that had matching scores for Anonymous 5, 6, and 7 values.  They did not have matching country ids, so the prediction was wrong.  Perhaps filtering the list for country id before attempting a match would be a good place to start tomorrow.  &lt;/p&gt;
 
-&lt;h3 id="quoting"&gt;Quoting&lt;/h3&gt;
+&lt;p&gt;Another idea is to filter by shared IP address.  With a dataframe of over 30M instances, using dummy columns to do a cosine similarity will be difficult.  We might first try to filter by shared IP so that there are fewer choices for each match of device to cookie.&lt;/p&gt;
 
-&lt;p&gt;Sometimes a link isn't enough, you want to quote someone on what they've said. Perhaps you've started using a new blogging platform and feel the sudden urge to share their slogan? A quote might be just the way to do it!&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;Ghost - Just a blogging platform&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h3 id="workingwithcode"&gt;Working with Code&lt;/h3&gt;
-
-&lt;p&gt;Got a streak of geek? We've got you covered there, too. You can write inline &lt;code&gt;&amp;lt;code&amp;gt;&lt;/code&gt; blocks really easily with back ticks. Want to show off something more comprehensive? 4 spaces of indentation gets you there. &lt;br&gt;
-    .awesome-thing {
-        display: block;
-        width: 100%;
-    }&lt;/p&gt;
-
-&lt;h3 id="readyforabreak"&gt;Ready for a Break?&lt;/h3&gt;
-
-&lt;p&gt;Throw 3 or more dashes down on any new line and you've got yourself a fancy new divider. Aw yeah.&lt;/p&gt;
-
-&lt;hr&gt;
-
-&lt;h3 id="advancedusage"&gt;Advanced Usage&lt;/h3&gt;
-
-&lt;p&gt;There's one fantastic secret about Markdown. If you want, you can write plain old HTML and it'll still work! Very flexible.&lt;/p&gt;
-
-&lt;p&gt;&lt;input type="text" placeholder="I'm an input field!"&gt;&lt;/p&gt;
-
-&lt;p&gt;That should be enough to get you started. Have fun - and let us know what you think :)&lt;/p&gt;</content:encoded></item></channel></rss>
+&lt;p&gt;Lots to think about, and lots to do!&lt;/p&gt;</content:encoded></item></channel></rss>

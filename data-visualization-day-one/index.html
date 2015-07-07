@@ -1,0 +1,169 @@
+
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="">
+
+        <title>Data Visualization - Day One</title>
+
+        <link href="../assets/css/bootstrap.min.css?v=671b87edfb" rel="stylesheet">
+        <link href="../assets/css/bootflat.min.css?v=671b87edfb" rel="stylesheet">
+		<link href="../assets/css/octicons.css?v=671b87edfb" rel="stylesheet">
+        <link href="../assets/css/app.css?v=671b87edfb" rel="stylesheet">
+
+        <link rel="shortcut icon" href="../favicon.ico">
+
+        <link rel="canonical" href="index.html">
+    
+    <meta property="og:site_name" content="Durham TIY Data Science Team">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Data Visualization - Day One">
+    <meta property="og:description" content="Today, I focused primarily on preparing the front end structure of this project.  To start, I setup this blog to track our daily progress. It is built on the node-based blogging platform Ghost.io and hosted on Github via a...">
+    <meta property="og:url" content="http://localhost:2368/data-visualization-day-one/">
+    <meta property="article:published_time" content="2015-07-07T05:16:05.365Z">
+    <meta property="article:modified_time" content="2015-07-07T06:18:14.588Z">
+    
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Data Visualization - Day One">
+    <meta name="twitter:description" content="Today, I focused primarily on preparing the front end structure of this project.  To start, I setup this blog to track our daily progress. It is built on the node-based blogging platform Ghost.io and hosted on Github via a...">
+    <meta name="twitter:url" content="http://localhost:2368/data-visualization-day-one/">
+    
+    <script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "Article",
+    "publisher": "Durham TIY Data Science Team",
+    "author": {
+        "@type": "Person",
+        "name": "Mark Harper",
+        "image": "//www.gravatar.com/avatar/6fbd8b2e38678bfa5d49d0a4445a36b5?s=250&d=mm&r=x",
+        "url": "http://localhost:2368/author/mark",
+        "sameAs": null,
+        "description": null
+    },
+    "headline": "Data Visualization - Day One",
+    "url": "http://localhost:2368/data-visualization-day-one/",
+    "datePublished": "2015-07-07T05:16:05.365Z",
+    "dateModified": "2015-07-07T06:18:14.588Z",
+    "description": "Today, I focused primarily on preparing the front end structure of this project.  To start, I setup this blog to track our daily progress. It is built on the node-based blogging platform Ghost.io and hosted on Github via a..."
+}
+    </script>
+
+    <meta name="generator" content="Ghost 0.6">
+    <link rel="alternate" type="application/rss+xml" title="Durham TIY Data Science Team" href="../rss/index.html">
+    </head>
+    <body>
+        <div id="wrap">
+            <div class="navbar navbar-inverse navbar-static-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand pull-left" href="../"> Durham TIY Data Science Team</a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li class="nav-home">
+  <a href="../">
+    Home
+  </a>
+</li>
+
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <!--
+                <li><a href="#"><span class="octicon octicon-mention"></span> Follow me</a></li>
+                <li><a href="#"><span class="octicon octicon-mark-github"></span> Fork me</a></li>
+                -->
+                <li><a href="../rss/index.rss"><span class="octicon octicon-rss"></span> RSS</a></li>
+		<li><a href="http://localhost:2368/ghost/"><span class="octicon octicon-pencil"></span></a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+            
+            
+
+<div class="container-fluid container-abitabove">
+    <div class="row">
+        <div class="col-lg-12 centered text-center container-withcover no-cover" style="">
+            <h1>Data Visualization - Day One</h1>
+            <h5>
+                <time datetime="2015-07-07"><span class="mega-octicon octicon-calendar"></span> 2015-07-07 at 02:18</time>
+            </h5>
+        </div>
+    </div>
+</div>
+            
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-10 col-lg-offset-1 centered">
+                        <main>
+    <article class="post">
+        <section class="posts">
+            <p>Today, I focused primarily on preparing the front end structure of this project. </p>
+
+<p>To start, I setup this blog to track our daily progress. It is built on the node-based blogging platform <a href="http://localhost:2368/data-visualization-day-one/ghost.org">Ghost.io</a> and hosted on Github via a static page generator, <a href="https://github.com/axitkhurana/buster">Buster</a>.</p>
+
+<p>The next step was to explore the javascript data visualization library <a href="http://localhost:2368/data-visualization-day-one/d3js.org">D3 JS</a>. I started by importing a dataset that Josh provided. This dataset shows the frequency of operating systems used in the user population from the <a href="http://localhost:2368/data-visualization-day-one/kaggle.com/c/icdm-2015-drawbridge-cross-device-connections">Kaggle Competition</a>. The biggest challenge that I encountered in visualizing the data was choosing how to best reorganize the dataset to easily build a bar chart in D3. I found that building a bar chart was easiest when each entry was formatted as a JSON object with an id and frequency. </p>
+
+<p>There are a few remaining problems with the bar chart as it stands now. It is not responsive, it cuts off entries beyond 56, it lacks a color gradient, and it is not interactive. The above features are all things that I am going to implement prior to demo day. So much left to do in the days to come. Check out the bar chart below!</p>
+
+<div class="os-chart"></div>
+            <hr>
+        </section>
+    </article>
+</main>
+<!--
+  Add comments code if needed, i.e. to include disqus
+-->
+<!-- <div id="comments">
+	<div id="disqus_thread"></div>
+	<script type="text/javascript">
+	    var disqus_shortname = 'replacethiswithyourname'; // required: replace example with your own shortname
+	    var disqus_identifier = '';
+	    (function() {
+	        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+	        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	    })();
+	</script>
+	<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+	<a href="http://disqus.com" class="dsq-brlink">Comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+<!-- End Comments Code -->
+ --&gt;
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="footer">
+            <footer>
+    <div class="footer text-center">
+      <div class="container">
+          <div class="row">
+              <div class="col-lg-10 col-lg-offset-1 centered">
+                © Copyright Durham TIY Data Science Team • powered by Ghost • <a href="https://github.com/fabienwang/Ghost-Flat"><span class="octicon octicon-mark-github"></span> Ghost-Flat</a> theme
+              </div>
+          </div>
+      </div>
+  </div>
+</footer>
+        </div>
+
+        <script src="../public/jquery.js?v=671b87edfb"></script>
+        <script src="../assets/js/d3.min.js?v=671b87edfb"></script>
+        <script src="../assets/js/lodash.min.js?v=671b87edfb"></script>
+        <script src="../assets/js/icheck.min.js?v=671b87edfb"></script>
+        <script src="../assets/js/jquery.fs.selecter.min.js?v=671b87edfb"></script>
+        <script src="../assets/js/jquery.fs.stepper.min.js?v=671b87edfb"></script>
+        <script src="../assets/js/os-vis.js?v=671b87edfb"></script>
+        <script src="../assets/js/bootstrap.min.js?v=671b87edfb"></script>
+        <script src="../assets/js/ghost-blog.js?v=671b87edfb"></script>
+    </body>

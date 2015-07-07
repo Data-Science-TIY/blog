@@ -108,3 +108,33 @@ footer {
 
 .no-cover {
     background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAKklEQVQImWPIzMz87+vri4IZfH19/6NLMMAYyBIMyCpgEgzo5mVmZv4HAPmEMRtoR8GQAAAAAElFTkSuQmCC) repeat;
+}
+
+.os-chart {
+  width: 100%;
+  font: 10px sans-serif;
+  text-anchor: middle;
+}
+
+svg {
+  margin: 0 auto;
+  width: 80%;
+  display: block;
+  padding: 1em 1em 1em 1em;
+  box-sizing: border-box;
+}
+
+.axis {
+  font: 7px sans-serif;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.x.axis path {
+  display: none;
+}
