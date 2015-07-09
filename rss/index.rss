@@ -1,4 +1,95 @@
-<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/" version="2.0"><channel><title>Durham TIY Data Science Team</title><description>A Kaggle competition entry by students from The Iron Yard Academy in Durham, NC.</description><link>http://localhost:2368/</link><generator>Ghost 0.6</generator><lastBuildDate>Tue, 07 Jul 2015 06:18:39 GMT</lastBuildDate><atom:link href="http://localhost:2368/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title>Data Visualization - Day One</title><description>&lt;p&gt;Today, I focused primarily on preparing the front end structure of this project. &lt;/p&gt;
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/" version="2.0"><channel><title>Build It Green</title><description>An examination of the LEED certification system.</description><link>http://localhost:2368/</link><generator>Ghost 0.6</generator><lastBuildDate>Thu, 09 Jul 2015 13:04:35 GMT</lastBuildDate><atom:link href="http://localhost:2368/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title>A day of REST</title><description>&lt;p&gt;Today we started to get rolling on our MVP - a data visualization of LEED projects in the United States.  On the front end we plan to have an interactive map visualizing the LEED project totals for each state with more granular data accessible by hovering.&lt;/p&gt;
+
+&lt;p&gt;On the back end&lt;/p&gt;</description><link>http://localhost:2368/untita-day-of-restled/</link><guid isPermaLink="false">550ae3ab-e15d-4e1c-9d17-1b28daff4cb7</guid><dc:creator>Mark Harper</dc:creator><pubDate>Thu, 09 Jul 2015 02:44:44 GMT</pubDate><content:encoded>&lt;p&gt;Today we started to get rolling on our MVP - a data visualization of LEED projects in the United States.  On the front end we plan to have an interactive map visualizing the LEED project totals for each state with more granular data accessible by hovering.&lt;/p&gt;
+
+&lt;p&gt;On the back end that means we need to have an API that can communicate with our node front end.  Throughout class we have worked with the Django REST framework.  Today I worked on implementing the first views, serializers and urls for our site.  The basics of REST as we have implemented at the Iron Yard are that URLs are nouns, HTTP actions are verbs (GET, POST, PATCH, PUT, DELETE).  Each query is self-contained and stateless.&lt;/p&gt;
+
+&lt;p&gt;Our MVP only needs PUT functionality, so I chose an generic ListAPIView for a list of states at the URL api/states/.  The serializer defined a number of SerializerMethodFields to render our data to JSON. For example, I want an average of LEED scores for the latest version of LEED.  First, I made a serializer:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;average_of_leed_nc_v2009 = serializers.SerializerMethodField()
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Then, define the output for the serializer:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;def get_average_of_leed_nc_v2009(self, obj):
+if not obj.project_set.filter(leed_version="LEED-NC v2009")\
+        .aggregate(Avg('points_achieved'))['points_achieved__avg']:
+    return 0
+else:
+    return int(round(obj.project_set.filter(leed_version="LEED-NC v2009")\
+        .aggregate(Avg('points_achieved'))['points_achieved__avg']))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;We had some null values that are converted to 0 with the if statement.  Otherwise, we’ll take the rounded average for display on the site.&lt;/p&gt;
+
+&lt;p&gt;We did something similar for most of our state data and we are ready to visualize.&lt;/p&gt;
+
+&lt;p&gt;Python Tips &lt;br&gt;
+We’re also still cleaning some data.  I had a particularly tricky small csv containing building permit stats for each state over the last 15 years.  Each column alternated between two different data, so I had to put data from the odd columns into one model and even columns into another.  I was pretty happy with my solution:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;def make_state_building_permits():
+
+with open("states_building_permits.csv") as infile:
+    reader = csv.reader(infile)
+    for row in reader:
+
+        for i in range(len(row)):
+
+            if i == 0:
+                print(row[0])
+
+            elif i % 2 != 0:
+                building_permit = BuildingPermit()
+                building_permit.state_id = State.objects.get(abbreviation = col_headers[i])
+                building_permit.year = row[0]
+                building_permit.total = row[i]
+                building_permit.save()
+
+            else:
+                housing_permit = HousingPermit()
+                housing_permit.state_id = State.objects.get(abbreviation = col_headers[i])
+                housing_permit.year = row[0]
+                housing_permit.total = row[i]
+                housing_permit.save()
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;(note: col_headers was a list of state abbreviations that corresponded to the csv headers)&lt;/p&gt;
+
+&lt;p&gt;Check in tomorrow for some more progress.  We are hoping to start Phase 2 of our data collection — digging into some individual scores for specific buildings.&lt;/p&gt;</content:encoded></item><item><title>Pivot Day</title><description>&lt;p&gt;Today our team got together and decided to pivot our project goals.  With a two week deadline, we needed to make sure we could deliver a compelling, viable product on demo day.&lt;/p&gt;
+
+&lt;p&gt;After a quick morning meeting, we decided to move on to a project with huge data science and&lt;/p&gt;</description><link>http://localhost:2368/pivot-day/</link><guid isPermaLink="false">69a6b6f5-6955-45b5-b075-a7169e8fd218</guid><dc:creator>Mark Harper</dc:creator><pubDate>Wed, 08 Jul 2015 02:47:00 GMT</pubDate><content:encoded>&lt;p&gt;Today our team got together and decided to pivot our project goals.  With a two week deadline, we needed to make sure we could deliver a compelling, viable product on demo day.&lt;/p&gt;
+
+&lt;p&gt;After a quick morning meeting, we decided to move on to a project with huge data science and visualization potential:  the LEED Certification process.  &lt;/p&gt;
+
+&lt;p&gt;LEED &lt;br&gt;
+LEED is a is a set of rating systems for the design, construction, operation, and maintenance of green buildings, homes, and neighborhoods.   You can read more at:  &lt;a href="http://www.usgbc.org/certification"&gt;http://www.usgbc.org/certification&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;We plan to make data on all existing LEED projects consumable and interesting for anyone interested in the project.  Our goals are to visualize the distribution of LEED projects in the US, analyze the scoring system and how builders choose which points to attain, and do some case analysis of individual buildings and their performance.  These smaller case studies are a stretch goal.&lt;/p&gt;
+
+&lt;p&gt;Daily Progress &lt;br&gt;
+We formulated our project and set up our Trello board.  This project will be perfect for Agile project management, including daily standups. After setting up our Django project, deploying to Heroku, and setting up our models and our PostgreSQL database, I worked on loading the initial LEED data to the database.  The overview data for LEED projects is available in a csv.  For individual projects, we’ll need to scrape the LEED site, but to do our initial analysis the overview data is fine.&lt;/p&gt;
+
+&lt;p&gt;The bulk of the afternoon and evening was spent wrangling the csv data into the database.  Even when a csv looks pretty clean, there are always problems with formatting.  That’s part of the job, and its fun to tackle each problem one by one until you have a clean set.&lt;/p&gt;
+
+&lt;p&gt;Wrangling the data also gives a good review of python and how it can handle different problems.  I’ll try to show a few code snippets each day that I find interesting.&lt;/p&gt;
+
+&lt;p&gt;Python Tips &lt;br&gt;
+The date records for certifications are modeled as django DateField, but our csv came in the format ’ 10/25/00’, and sometimes the field was empty.  To load this correctly I wrote a function using strptime, which parses a string representing a time according to a format.   In our example, we needed to use:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;%y - year without a century (range 00 to 99)
+%m - month (01 to 12)
+%d - day of the month (01 to 31)
+
+import time
+from datetime import date
+
+def fix_time(time_string):
+    if time_string == "":
+        return None
+else:
+    strp_time = time.strptime(time_string, '%m/%d/%y')
+    return date.fromtimestamp(time.mktime(strp_time))
+&lt;/code&gt;&lt;/pre&gt;</content:encoded></item><item><title>Data Visualization - Day One</title><description>&lt;p&gt;Today, I focused primarily on preparing the front end structure of this project. &lt;/p&gt;
 
 &lt;p&gt;To start, I setup this blog to track our daily progress. It is built on the node-based blogging platform &lt;a href="http://localhost:2368/data-visualization-day-one/ghost.org"&gt;Ghost.io&lt;/a&gt; and hosted on Github via a static page generator, &lt;a href="https://github.com/axitkhurana/buster"&gt;Buster&lt;/a&gt;.&lt;/p&gt;
 

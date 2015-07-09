@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="">
 
-        <title>Data Visualization - Day One</title>
+        <title>A day of REST</title>
 
         <link href="../assets/css/bootstrap.min.css?v=ef9d835ac6" rel="stylesheet">
         <link href="../assets/css/bootflat.min.css?v=ef9d835ac6" rel="stylesheet">
@@ -18,16 +18,16 @@
     
     <meta property="og:site_name" content="Build It Green">
     <meta property="og:type" content="article">
-    <meta property="og:title" content="Data Visualization - Day One">
-    <meta property="og:description" content="Today, I focused primarily on preparing the front end structure of this project.  To start, I setup this blog to track our daily progress. It is built on the node-based blogging platform Ghost.io and hosted on Github via a...">
-    <meta property="og:url" content="http://localhost:2368/data-visualization-day-one/">
-    <meta property="article:published_time" content="2015-07-07T05:16:05.365Z">
-    <meta property="article:modified_time" content="2015-07-07T06:18:14.588Z">
+    <meta property="og:title" content="A day of REST">
+    <meta property="og:description" content="Today we started to get rolling on our MVP - a data visualization of LEED projects in the United States.  On the front end we plan to have an interactive map visualizing the LEED project totals for each state with...">
+    <meta property="og:url" content="http://localhost:2368/untita-day-of-restled/">
+    <meta property="article:published_time" content="2015-07-09T02:44:44.297Z">
+    <meta property="article:modified_time" content="2015-07-09T02:44:45.959Z">
     
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="Data Visualization - Day One">
-    <meta name="twitter:description" content="Today, I focused primarily on preparing the front end structure of this project.  To start, I setup this blog to track our daily progress. It is built on the node-based blogging platform Ghost.io and hosted on Github via a...">
-    <meta name="twitter:url" content="http://localhost:2368/data-visualization-day-one/">
+    <meta name="twitter:title" content="A day of REST">
+    <meta name="twitter:description" content="Today we started to get rolling on our MVP - a data visualization of LEED projects in the United States.  On the front end we plan to have an interactive map visualizing the LEED project totals for each state with...">
+    <meta name="twitter:url" content="http://localhost:2368/untita-day-of-restled/">
     
     <script type="application/ld+json">
 {
@@ -42,11 +42,11 @@
         "sameAs": null,
         "description": null
     },
-    "headline": "Data Visualization - Day One",
-    "url": "http://localhost:2368/data-visualization-day-one/",
-    "datePublished": "2015-07-07T05:16:05.365Z",
-    "dateModified": "2015-07-07T06:18:14.588Z",
-    "description": "Today, I focused primarily on preparing the front end structure of this project.  To start, I setup this blog to track our daily progress. It is built on the node-based blogging platform Ghost.io and hosted on Github via a..."
+    "headline": "A day of REST",
+    "url": "http://localhost:2368/untita-day-of-restled/",
+    "datePublished": "2015-07-09T02:44:44.297Z",
+    "dateModified": "2015-07-09T02:44:45.959Z",
+    "description": "Today we started to get rolling on our MVP - a data visualization of LEED projects in the United States.  On the front end we plan to have an interactive map visualizing the LEED project totals for each state with..."
 }
     </script>
 
@@ -91,7 +91,7 @@
 <div class="container-fluid container-abitabove">
     <div class="row">
         <div class="col-lg-12 centered text-center container-withcover no-cover" style="">
-            <h1>Data Visualization - Day One</h1>
+            <h1>A day of REST</h1>
             <h5>
                 <time datetime="2015-07-09"><span class="mega-octicon octicon-calendar"></span> 2015-07-09 at 09:04</time>
             </h5>
@@ -105,15 +105,62 @@
                         <main>
     <article class="post">
         <section class="posts">
-            <p>Today, I focused primarily on preparing the front end structure of this project. </p>
+            <p>Today we started to get rolling on our MVP - a data visualization of LEED projects in the United States.  On the front end we plan to have an interactive map visualizing the LEED project totals for each state with more granular data accessible by hovering.</p>
 
-<p>To start, I setup this blog to track our daily progress. It is built on the node-based blogging platform <a href="http://localhost:2368/data-visualization-day-one/ghost.org">Ghost.io</a> and hosted on Github via a static page generator, <a href="https://github.com/axitkhurana/buster">Buster</a>.</p>
+<p>On the back end that means we need to have an API that can communicate with our node front end.  Throughout class we have worked with the Django REST framework.  Today I worked on implementing the first views, serializers and urls for our site.  The basics of REST as we have implemented at the Iron Yard are that URLs are nouns, HTTP actions are verbs (GET, POST, PATCH, PUT, DELETE).  Each query is self-contained and stateless.</p>
 
-<p>The next step was to explore the javascript data visualization library <a href="http://localhost:2368/data-visualization-day-one/d3js.org">D3 JS</a>. I started by importing a dataset that Josh provided. This dataset shows the frequency of operating systems used in the user population from the <a href="http://localhost:2368/data-visualization-day-one/kaggle.com/c/icdm-2015-drawbridge-cross-device-connections">Kaggle Competition</a>. The biggest challenge that I encountered in visualizing the data was choosing how to best reorganize the dataset to easily build a bar chart in D3. I found that building a bar chart was easiest when each entry was formatted as a JSON object with an id and frequency. </p>
+<p>Our MVP only needs PUT functionality, so I chose an generic ListAPIView for a list of states at the URL api/states/.  The serializer defined a number of SerializerMethodFields to render our data to JSON. For example, I want an average of LEED scores for the latest version of LEED.  First, I made a serializer:</p>
 
-<p>There are a few remaining problems with the bar chart as it stands now. It is not responsive, it cuts off entries beyond 56, it lacks a color gradient, and it is not interactive. The above features are all things that I am going to implement prior to demo day. So much left to do in the days to come. Check out the bar chart below!</p>
+<pre><code>average_of_leed_nc_v2009 = serializers.SerializerMethodField()
+</code></pre>
 
-<div class="os-chart"></div>
+<p>Then, define the output for the serializer:</p>
+
+<pre><code>def get_average_of_leed_nc_v2009(self, obj):
+if not obj.project_set.filter(leed_version="LEED-NC v2009")\
+        .aggregate(Avg('points_achieved'))['points_achieved__avg']:
+    return 0
+else:
+    return int(round(obj.project_set.filter(leed_version="LEED-NC v2009")\
+        .aggregate(Avg('points_achieved'))['points_achieved__avg']))
+</code></pre>
+
+<p>We had some null values that are converted to 0 with the if statement.  Otherwise, we’ll take the rounded average for display on the site.</p>
+
+<p>We did something similar for most of our state data and we are ready to visualize.</p>
+
+<p>Python Tips <br>
+We’re also still cleaning some data.  I had a particularly tricky small csv containing building permit stats for each state over the last 15 years.  Each column alternated between two different data, so I had to put data from the odd columns into one model and even columns into another.  I was pretty happy with my solution:</p>
+
+<pre><code>def make_state_building_permits():
+
+with open("states_building_permits.csv") as infile:
+    reader = csv.reader(infile)
+    for row in reader:
+
+        for i in range(len(row)):
+
+            if i == 0:
+                print(row[0])
+
+            elif i % 2 != 0:
+                building_permit = BuildingPermit()
+                building_permit.state_id = State.objects.get(abbreviation = col_headers[i])
+                building_permit.year = row[0]
+                building_permit.total = row[i]
+                building_permit.save()
+
+            else:
+                housing_permit = HousingPermit()
+                housing_permit.state_id = State.objects.get(abbreviation = col_headers[i])
+                housing_permit.year = row[0]
+                housing_permit.total = row[i]
+                housing_permit.save()
+</code></pre>
+
+<p>(note: col_headers was a list of state abbreviations that corresponded to the csv headers)</p>
+
+<p>Check in tomorrow for some more progress.  We are hoping to start Phase 2 of our data collection — digging into some individual scores for specific buildings.</p>
             <hr>
         </section>
     </article>

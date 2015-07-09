@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="">
 
-        <title>Data Visualization - Day One</title>
+        <title>Pivot Day</title>
 
         <link href="../assets/css/bootstrap.min.css?v=ef9d835ac6" rel="stylesheet">
         <link href="../assets/css/bootflat.min.css?v=ef9d835ac6" rel="stylesheet">
@@ -18,16 +18,16 @@
     
     <meta property="og:site_name" content="Build It Green">
     <meta property="og:type" content="article">
-    <meta property="og:title" content="Data Visualization - Day One">
-    <meta property="og:description" content="Today, I focused primarily on preparing the front end structure of this project.  To start, I setup this blog to track our daily progress. It is built on the node-based blogging platform Ghost.io and hosted on Github via a...">
-    <meta property="og:url" content="http://localhost:2368/data-visualization-day-one/">
-    <meta property="article:published_time" content="2015-07-07T05:16:05.365Z">
-    <meta property="article:modified_time" content="2015-07-07T06:18:14.588Z">
+    <meta property="og:title" content="Pivot Day">
+    <meta property="og:description" content="Today our team got together and decided to pivot our project goals.  With a two week deadline, we needed to make sure we could deliver a compelling, viable product on demo day. After a quick morning meeting, we decided to...">
+    <meta property="og:url" content="http://localhost:2368/pivot-day/">
+    <meta property="article:published_time" content="2015-07-08T02:47:00.000Z">
+    <meta property="article:modified_time" content="2015-07-09T02:47:59.406Z">
     
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="Data Visualization - Day One">
-    <meta name="twitter:description" content="Today, I focused primarily on preparing the front end structure of this project.  To start, I setup this blog to track our daily progress. It is built on the node-based blogging platform Ghost.io and hosted on Github via a...">
-    <meta name="twitter:url" content="http://localhost:2368/data-visualization-day-one/">
+    <meta name="twitter:title" content="Pivot Day">
+    <meta name="twitter:description" content="Today our team got together and decided to pivot our project goals.  With a two week deadline, we needed to make sure we could deliver a compelling, viable product on demo day. After a quick morning meeting, we decided to...">
+    <meta name="twitter:url" content="http://localhost:2368/pivot-day/">
     
     <script type="application/ld+json">
 {
@@ -42,11 +42,11 @@
         "sameAs": null,
         "description": null
     },
-    "headline": "Data Visualization - Day One",
-    "url": "http://localhost:2368/data-visualization-day-one/",
-    "datePublished": "2015-07-07T05:16:05.365Z",
-    "dateModified": "2015-07-07T06:18:14.588Z",
-    "description": "Today, I focused primarily on preparing the front end structure of this project.  To start, I setup this blog to track our daily progress. It is built on the node-based blogging platform Ghost.io and hosted on Github via a..."
+    "headline": "Pivot Day",
+    "url": "http://localhost:2368/pivot-day/",
+    "datePublished": "2015-07-08T02:47:00.000Z",
+    "dateModified": "2015-07-09T02:47:59.406Z",
+    "description": "Today our team got together and decided to pivot our project goals.  With a two week deadline, we needed to make sure we could deliver a compelling, viable product on demo day. After a quick morning meeting, we decided to..."
 }
     </script>
 
@@ -91,7 +91,7 @@
 <div class="container-fluid container-abitabove">
     <div class="row">
         <div class="col-lg-12 centered text-center container-withcover no-cover" style="">
-            <h1>Data Visualization - Day One</h1>
+            <h1>Pivot Day</h1>
             <h5>
                 <time datetime="2015-07-09"><span class="mega-octicon octicon-calendar"></span> 2015-07-09 at 09:04</time>
             </h5>
@@ -105,15 +105,39 @@
                         <main>
     <article class="post">
         <section class="posts">
-            <p>Today, I focused primarily on preparing the front end structure of this project. </p>
+            <p>Today our team got together and decided to pivot our project goals.  With a two week deadline, we needed to make sure we could deliver a compelling, viable product on demo day.</p>
 
-<p>To start, I setup this blog to track our daily progress. It is built on the node-based blogging platform <a href="http://localhost:2368/data-visualization-day-one/ghost.org">Ghost.io</a> and hosted on Github via a static page generator, <a href="https://github.com/axitkhurana/buster">Buster</a>.</p>
+<p>After a quick morning meeting, we decided to move on to a project with huge data science and visualization potential:  the LEED Certification process.  </p>
 
-<p>The next step was to explore the javascript data visualization library <a href="http://localhost:2368/data-visualization-day-one/d3js.org">D3 JS</a>. I started by importing a dataset that Josh provided. This dataset shows the frequency of operating systems used in the user population from the <a href="http://localhost:2368/data-visualization-day-one/kaggle.com/c/icdm-2015-drawbridge-cross-device-connections">Kaggle Competition</a>. The biggest challenge that I encountered in visualizing the data was choosing how to best reorganize the dataset to easily build a bar chart in D3. I found that building a bar chart was easiest when each entry was formatted as a JSON object with an id and frequency. </p>
+<p>LEED <br>
+LEED is a is a set of rating systems for the design, construction, operation, and maintenance of green buildings, homes, and neighborhoods.   You can read more at:  <a href="http://www.usgbc.org/certification">http://www.usgbc.org/certification</a></p>
 
-<p>There are a few remaining problems with the bar chart as it stands now. It is not responsive, it cuts off entries beyond 56, it lacks a color gradient, and it is not interactive. The above features are all things that I am going to implement prior to demo day. So much left to do in the days to come. Check out the bar chart below!</p>
+<p>We plan to make data on all existing LEED projects consumable and interesting for anyone interested in the project.  Our goals are to visualize the distribution of LEED projects in the US, analyze the scoring system and how builders choose which points to attain, and do some case analysis of individual buildings and their performance.  These smaller case studies are a stretch goal.</p>
 
-<div class="os-chart"></div>
+<p>Daily Progress <br>
+We formulated our project and set up our Trello board.  This project will be perfect for Agile project management, including daily standups. After setting up our Django project, deploying to Heroku, and setting up our models and our PostgreSQL database, I worked on loading the initial LEED data to the database.  The overview data for LEED projects is available in a csv.  For individual projects, we’ll need to scrape the LEED site, but to do our initial analysis the overview data is fine.</p>
+
+<p>The bulk of the afternoon and evening was spent wrangling the csv data into the database.  Even when a csv looks pretty clean, there are always problems with formatting.  That’s part of the job, and its fun to tackle each problem one by one until you have a clean set.</p>
+
+<p>Wrangling the data also gives a good review of python and how it can handle different problems.  I’ll try to show a few code snippets each day that I find interesting.</p>
+
+<p>Python Tips <br>
+The date records for certifications are modeled as django DateField, but our csv came in the format ’ 10/25/00’, and sometimes the field was empty.  To load this correctly I wrote a function using strptime, which parses a string representing a time according to a format.   In our example, we needed to use:</p>
+
+<pre><code>%y - year without a century (range 00 to 99)
+%m - month (01 to 12)
+%d - day of the month (01 to 31)
+
+import time
+from datetime import date
+
+def fix_time(time_string):
+    if time_string == "":
+        return None
+else:
+    strp_time = time.strptime(time_string, '%m/%d/%y')
+    return date.fromtimestamp(time.mktime(strp_time))
+</code></pre>
             <hr>
         </section>
     </article>
