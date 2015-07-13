@@ -1,6 +1,59 @@
-<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/" version="2.0"><channel><title>Build It Green</title><description>An examination of the LEED certification system.</description><link>http://localhost:2368/</link><generator>Ghost 0.6</generator><lastBuildDate>Thu, 09 Jul 2015 13:04:35 GMT</lastBuildDate><atom:link href="http://localhost:2368/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title>A day of REST</title><description>&lt;p&gt;Today we started to get rolling on our MVP - a data visualization of LEED projects in the United States.  On the front end we plan to have an interactive map visualizing the LEED project totals for each state with more granular data accessible by hovering.&lt;/p&gt;
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/" version="2.0"><channel><title>Build It Green</title><description>An examination of the LEED certification system.</description><link>http://localhost:2368/</link><generator>Ghost 0.6</generator><lastBuildDate>Mon, 13 Jul 2015 15:08:26 GMT</lastBuildDate><atom:link href="http://localhost:2368/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title>Checking In</title><description>&lt;p&gt;More APIs…More Data&lt;/p&gt;
 
-&lt;p&gt;On the back end&lt;/p&gt;</description><link>http://localhost:2368/untita-day-of-restled/</link><guid isPermaLink="false">550ae3ab-e15d-4e1c-9d17-1b28daff4cb7</guid><dc:creator>Mark Harper</dc:creator><pubDate>Thu, 09 Jul 2015 02:44:44 GMT</pubDate><content:encoded>&lt;p&gt;Today we started to get rolling on our MVP - a data visualization of LEED projects in the United States.  On the front end we plan to have an interactive map visualizing the LEED project totals for each state with more granular data accessible by hovering.&lt;/p&gt;
+&lt;p&gt;We are settled in today and got a little closer to finishing the MVP — a single page website that displays LEED stats by state and trends over time.  Mark has been working on the state map, my side has been to provide him data via our&lt;/p&gt;</description><link>http://localhost:2368/checking-in/</link><guid isPermaLink="false">9ef15942-23fd-42f1-a60b-017be2b5c925</guid><dc:creator>josh higgins</dc:creator><pubDate>Mon, 13 Jul 2015 01:13:00 GMT</pubDate><content:encoded>&lt;p&gt;More APIs…More Data&lt;/p&gt;
+
+&lt;p&gt;We are settled in today and got a little closer to finishing the MVP — a single page website that displays LEED stats by state and trends over time.  Mark has been working on the state map, my side has been to provide him data via our Django REST framework API.  Since states are a model in our database, I used a generic ListAPIView for GET requests about the states.  I wrote a serializer that would display info for each state.&lt;/p&gt;
+
+&lt;p&gt;For example:&lt;/p&gt;
+
+&lt;p&gt;class StateMapSerializer(serializers.ModelSerializer): &lt;br&gt;
+     number&lt;em&gt;of&lt;/em&gt;projects = serializers.SerializerMethodField()
+     class Meta:
+         model = State&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt; fields = ('abbreviation', 'name', 'number_of_projects',
+
+ def get_number_of_projects(self, obj):
+     return obj.project_set.all().count()
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;For each state, we’ll have a bunch of queries that are serialized that Mark can display on a US map.&lt;/p&gt;
+
+&lt;p&gt;For now, he can access all the state data through one api URL.&lt;/p&gt;
+
+&lt;p&gt;API Views &lt;br&gt;
+Generic views and viewsets can be great, but if you need to get some basic queries to the API, using a regular APIView does the trick.&lt;/p&gt;
+
+&lt;p&gt;It was good review to some of these for the trend data by year for LEED projects.&lt;/p&gt;
+
+&lt;p&gt;class AllTrends(APIView):&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;def get(self, request, format=None):
+    """
+    Return trends by year.
+    """
+    trends_dict = {}
+    year_list = [2009, 2010, 2011, 2012, 2013, 2014]
+    projects_certified_dict = {i: Project.objects.filter(certification_date__gte=datetime(i, 1,
+                               1)).filter(certification_date__lte=datetime(i, 12, 31))
+                               .count() for i in year_list}
+    trends_dict["total_certifications"] = projects_certified_dict
+
+ return Response(trends_dict)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Then link this up to a URL and it is ready for the front end.&lt;/p&gt;
+
+&lt;p&gt;We have a few more queries to write for trend display— then our back end will be ready for our MVP of state and yearly trends.  That means it is time for...&lt;/p&gt;
+
+&lt;p&gt;More Data &lt;br&gt;
+We got our scraper to work on the LEED site!  We’ve got detailed score data for about 7000 projects to do some in depth analysis on how builders are using the system. &lt;/p&gt;
+
+&lt;p&gt;Which points are easiest to attain?  Which are hardest?  Do project total scores cluster around the cutoffs for each certification level?  We’ll spend the next couple days doing analysis as we finish up the MVP.  Then we’ll have our second phase of visualizations to display.&lt;/p&gt;
+
+&lt;p&gt;Check in with us again and see how we’re doing!&lt;/p&gt;</content:encoded></item><item><title>A day of REST</title><description>&lt;p&gt;Today we started to get rolling on our MVP - a data visualization of LEED projects in the United States.  On the front end we plan to have an interactive map visualizing the LEED project totals for each state with more granular data accessible by hovering.&lt;/p&gt;
+
+&lt;p&gt;On the back end&lt;/p&gt;</description><link>http://localhost:2368/untita-day-of-restled/</link><guid isPermaLink="false">550ae3ab-e15d-4e1c-9d17-1b28daff4cb7</guid><dc:creator>josh higgins</dc:creator><pubDate>Thu, 09 Jul 2015 02:44:44 GMT</pubDate><content:encoded>&lt;p&gt;Today we started to get rolling on our MVP - a data visualization of LEED projects in the United States.  On the front end we plan to have an interactive map visualizing the LEED project totals for each state with more granular data accessible by hovering.&lt;/p&gt;
 
 &lt;p&gt;On the back end that means we need to have an API that can communicate with our node front end.  Throughout class we have worked with the Django REST framework.  Today I worked on implementing the first views, serializers and urls for our site.  The basics of REST as we have implemented at the Iron Yard are that URLs are nouns, HTTP actions are verbs (GET, POST, PATCH, PUT, DELETE).  Each query is self-contained and stateless.&lt;/p&gt;
 
@@ -57,7 +110,7 @@ with open("states_building_permits.csv") as infile:
 
 &lt;p&gt;Check in tomorrow for some more progress.  We are hoping to start Phase 2 of our data collection — digging into some individual scores for specific buildings.&lt;/p&gt;</content:encoded></item><item><title>Pivot Day</title><description>&lt;p&gt;Today our team got together and decided to pivot our project goals.  With a two week deadline, we needed to make sure we could deliver a compelling, viable product on demo day.&lt;/p&gt;
 
-&lt;p&gt;After a quick morning meeting, we decided to move on to a project with huge data science and&lt;/p&gt;</description><link>http://localhost:2368/pivot-day/</link><guid isPermaLink="false">69a6b6f5-6955-45b5-b075-a7169e8fd218</guid><dc:creator>Mark Harper</dc:creator><pubDate>Wed, 08 Jul 2015 02:47:00 GMT</pubDate><content:encoded>&lt;p&gt;Today our team got together and decided to pivot our project goals.  With a two week deadline, we needed to make sure we could deliver a compelling, viable product on demo day.&lt;/p&gt;
+&lt;p&gt;After a quick morning meeting, we decided to move on to a project with huge data science and&lt;/p&gt;</description><link>http://localhost:2368/pivot-day/</link><guid isPermaLink="false">69a6b6f5-6955-45b5-b075-a7169e8fd218</guid><dc:creator>josh higgins</dc:creator><pubDate>Wed, 08 Jul 2015 02:47:00 GMT</pubDate><content:encoded>&lt;p&gt;Today our team got together and decided to pivot our project goals.  With a two week deadline, we needed to make sure we could deliver a compelling, viable product on demo day.&lt;/p&gt;
 
 &lt;p&gt;After a quick morning meeting, we decided to move on to a project with huge data science and visualization potential:  the LEED Certification process.  &lt;/p&gt;
 
@@ -105,7 +158,7 @@ else:
 
 &lt;p&gt;We encountered a few problems that will help us define the next steps for analysis.&lt;/p&gt;
 
-&lt;p&gt;Our first task, as always, is to define our problem.  We can view this as a similarity matching problem.  In&lt;/p&gt;</description><link>http://localhost:2368/data-analysis-day-one/</link><guid isPermaLink="false">7c22130d-5b12-4b5c-87ca-6017f9253295</guid><dc:creator>Mark Harper</dc:creator><pubDate>Tue, 07 Jul 2015 03:15:05 GMT</pubDate><content:encoded>&lt;p&gt;Today was a day to further explore the data and test out some initial ideas.&lt;/p&gt;
+&lt;p&gt;Our first task, as always, is to define our problem.  We can view this as a similarity matching problem.  In&lt;/p&gt;</description><link>http://localhost:2368/data-analysis-day-one/</link><guid isPermaLink="false">7c22130d-5b12-4b5c-87ca-6017f9253295</guid><dc:creator>josh higgins</dc:creator><pubDate>Tue, 07 Jul 2015 03:15:05 GMT</pubDate><content:encoded>&lt;p&gt;Today was a day to further explore the data and test out some initial ideas.&lt;/p&gt;
 
 &lt;p&gt;We encountered a few problems that will help us define the next steps for analysis.&lt;/p&gt;
 
