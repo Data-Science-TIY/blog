@@ -1,4 +1,43 @@
-<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/" version="2.0"><channel><title>Build It Green</title><description>An examination of the LEED certification system.</description><link>http://localhost:2368/</link><generator>Ghost 0.6</generator><lastBuildDate>Mon, 13 Jul 2015 15:08:26 GMT</lastBuildDate><atom:link href="http://localhost:2368/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title>Checking In</title><description>&lt;p&gt;More APIs…More Data&lt;/p&gt;
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/" version="2.0"><channel><title>Build It Green</title><description>An examination of the LEED certification system.</description><link>http://localhost:2368/</link><generator>Ghost 0.6</generator><lastBuildDate>Mon, 13 Jul 2015 15:19:08 GMT</lastBuildDate><atom:link href="http://localhost:2368/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title>Weekend Work</title><description>&lt;p&gt;After successfully scraping over 7000 individual scoresheets from the LEED site, we set to work getting our api ready for the display of score information and analysis.&lt;/p&gt;
+
+&lt;p&gt;We believe that we are the first to do a public analysis of individual scoresheets for LEED.  There should be many interesting findings.&lt;/p&gt;</description><link>http://localhost:2368/weekend-work/</link><guid isPermaLink="false">c11a1fe1-2eb3-4623-b56c-5b7c90e55565</guid><dc:creator>josh higgins</dc:creator><pubDate>Mon, 13 Jul 2015 15:09:43 GMT</pubDate><content:encoded>&lt;p&gt;After successfully scraping over 7000 individual scoresheets from the LEED site, we set to work getting our api ready for the display of score information and analysis.&lt;/p&gt;
+
+&lt;p&gt;We believe that we are the first to do a public analysis of individual scoresheets for LEED.  There should be many interesting findings.  We want to start by finding out relatively how difficult it is to achieve each point.  This will be extremely helpful for builders to gauge which points they should be looking to achieve.  We’d also like to highlight the differences in Platinum, Gold, Silver and Certified projects.  What points really make the difference in achieving higher certifications?  Finally, what sort of correlations are there between all the score points.&lt;/p&gt;
+
+&lt;p&gt;This weekend I set up the API to serve up some of these datapoints to our front end to be visualized in D3.  I also ran some initial plot on correlations and averages in ipython notebook with Pandas and seaborn.  Its pretty amazing what you can do with just those tools.  &lt;/p&gt;
+
+&lt;p&gt;Just a sneak peek at what you’ll find when our site goes live:&lt;/p&gt;
+
+&lt;p&gt;Exciting!&lt;/p&gt;
+
+&lt;p&gt;Python tips: &lt;br&gt;
+I’ll try to post something here that I thought was fun to learn or know how to do.  I had lots to choose from this weekend, but since I was working in pandas quite a bit, I had a good chance to review and try some new stuff, including reading a postgreSQL table into a dataframe.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;import pandas as pd
+import psycopg2
+
+conn = psycopg2.connect(database="builditgreen")
+import pandas.io.sql as pdsql
+
+scores_2009_df = pdsql.read_frame("SELECT * FROM %s;" % 'api_score2009', conn)
+#Note that read_frame is being replaced by read_sql, but either works for now.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Pickling &lt;br&gt;
+When I get a dataframe imported and in the right shape, I like to pickle it so I can access it later without going through all the steps again.  It can save a lot of time! &lt;br&gt;
+First:       &lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;average_comparison_2009_small.to_pickle('LEEDv2009byCertificationLevel.pkl')
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Then:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;df_2009 = pd.read_pickle(‘LEEDv2009byCertificationLevel.pkl’)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;To use it again later as df_2009&lt;/p&gt;
+
+&lt;p&gt;Check in again tomorrow, we should have more to talk about as we get into some machine learning and clustering to explore the scoring system.  I’ll also start to look at our analysis of the energy use of LEED projects.&lt;/p&gt;</content:encoded></item><item><title>Checking In</title><description>&lt;p&gt;More APIs…More Data&lt;/p&gt;
 
 &lt;p&gt;We are settled in today and got a little closer to finishing the MVP — a single page website that displays LEED stats by state and trends over time.  Mark has been working on the state map, my side has been to provide him data via our&lt;/p&gt;</description><link>http://localhost:2368/checking-in/</link><guid isPermaLink="false">9ef15942-23fd-42f1-a60b-017be2b5c925</guid><dc:creator>josh higgins</dc:creator><pubDate>Mon, 13 Jul 2015 01:13:00 GMT</pubDate><content:encoded>&lt;p&gt;More APIs…More Data&lt;/p&gt;
 
@@ -6,12 +45,12 @@
 
 &lt;p&gt;For example:&lt;/p&gt;
 
-&lt;p&gt;class StateMapSerializer(serializers.ModelSerializer): &lt;br&gt;
-     number&lt;em&gt;of&lt;/em&gt;projects = serializers.SerializerMethodField()
-     class Meta:
-         model = State&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt; class StateMapSerializer(serializers.ModelSerializer):
+     number_of_projects =        serializers.SerializerMethodField()
+ class Meta:
+     model = State
 
-&lt;pre&gt;&lt;code&gt; fields = ('abbreviation', 'name', 'number_of_projects',
+ fields = ('abbreviation', 'name', 'number_of_projects',
 
  def get_number_of_projects(self, obj):
      return obj.project_set.all().count()
@@ -26,18 +65,20 @@ Generic views and viewsets can be great, but if you need to get some basic queri
 
 &lt;p&gt;It was good review to some of these for the trend data by year for LEED projects.&lt;/p&gt;
 
-&lt;p&gt;class AllTrends(APIView):&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;class AllTrends(APIView):
 
-&lt;pre&gt;&lt;code&gt;def get(self, request, format=None):
+def get(self, request, format=None):
     """
     Return trends by year.
     """
     trends_dict = {}
     year_list = [2009, 2010, 2011, 2012, 2013, 2014]
-    projects_certified_dict = {i: Project.objects.filter(certification_date__gte=datetime(i, 1,
-                               1)).filter(certification_date__lte=datetime(i, 12, 31))
-                               .count() for i in year_list}
-    trends_dict["total_certifications"] = projects_certified_dict
+    projects_certified_dict = {i: Project.objects
+       .filter(certification_date__gte=datetime(i, 1,\                                 
+       1)).filter(certification_date__lte=datetime(i,\       
+       12,31)).count() for i in year_list}
+    trends_dict["total_certifications"] =   
+       projects_certified_dict
 
  return Response(trends_dict)
 &lt;/code&gt;&lt;/pre&gt;
