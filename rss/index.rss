@@ -1,4 +1,33 @@
-<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/" version="2.0"><channel><title>Build It Green</title><description>An examination of the LEED certification system.</description><link>http://localhost:2368/</link><generator>Ghost 0.6</generator><lastBuildDate>Mon, 13 Jul 2015 15:19:08 GMT</lastBuildDate><atom:link href="http://localhost:2368/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title>Weekend Work</title><description>&lt;p&gt;After successfully scraping over 7000 individual scoresheets from the LEED site, we set to work getting our api ready for the display of score information and analysis.&lt;/p&gt;
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/" version="2.0"><channel><title>Build It Green</title><description>An examination of the LEED certification system.</description><link>http://localhost:2368/</link><generator>Ghost 0.6</generator><lastBuildDate>Fri, 17 Jul 2015 01:43:24 GMT</lastBuildDate><atom:link href="http://localhost:2368/rss/" rel="self" type="application/rss+xml"/><ttl>60</ttl><item><title>APIs and Plotly</title><description>&lt;p&gt;As Mark and I have gotten our workflow down for this project, I have really begun to understand the importance of communication between the back end and front end.  When I’m designing the API endpoints, organization matters, and the closer I can get my endpoints to match the structure&lt;/p&gt;</description><link>http://localhost:2368/apis-and-plotly/</link><guid isPermaLink="false">7016c24e-753f-46cb-a5e3-ebbf7852d71d</guid><dc:creator>josh higgins</dc:creator><pubDate>Fri, 17 Jul 2015 01:43:02 GMT</pubDate><content:encoded>&lt;p&gt;As Mark and I have gotten our workflow down for this project, I have really begun to understand the importance of communication between the back end and front end.  When I’m designing the API endpoints, organization matters, and the closer I can get my endpoints to match the structure mark needs for his visualizations the better. &lt;/p&gt;
+
+&lt;p&gt;Mark and I talked and decided that structuring the API to serve the data better would be faster than him trying to parse a more complicated API.&lt;/p&gt;
+
+&lt;p&gt;To that end, I refactored the API for our breakdown of the credits that LEED projects attain on average.  This is data that has not been presented before, so it’s key that we get it right.  We want to present the data in both yearly trends and show differences between certification levels.  For me that means making some nested dictionaries that can be outputted as JSON for Mark’s D3 visualizations.&lt;/p&gt;
+
+&lt;p&gt;Each data point needs a query similar to:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;eqc_dict = {}
+for credit in eqc_list:
+eqc_dict[credit] = {}
+for year in year_list:
+    eqc_dict[credit][year] = float("     {0:.2f}".format((ScoreTwoPointTwo.objects
+                                        .filter(project__certification_date__gte=datetime(year, 1, 1))
+                                        .filter(project__certification_date__lte=datetime(year, 12, 31))
+                                        .aggregate(Avg(credit))['{}__avg'.format(credit)]) /
+                                   possible_dict[credit]))
+for cert in cert_list:
+    eqc_dict[credit][cert] = float("{0:.2f}".format((ScoreTwoPointTwo.objects
+                                                    .filter(project__certification_level=cert)
+                                                    .aggregate(Avg(credit))['{}__avg'.format(credit)]) /
+                                                    possible_dict[credit]))
+trends_dict["eqc"] = eqc_dict
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This was a pretty complicated structure so I opted to write it out instead of trying to nest dictionary comprehensions.&lt;/p&gt;
+
+&lt;h4&gt;Plotly&lt;/h4&gt;  
+
+&lt;p&gt;In order to get more visualizations on Build It Green, I dug into plot.ly  — an awesome data visualization tool that works really well with Python and pandas.  I really wanted to make a bubble map that displayed LEED projects by city, so I took the morning yesterday and formatted my data to include latitude, longitude, and population for each city, along with a count of projects in each city.  Then I worked in an python notebook and plotly to plot my data.  Check it out:  &lt;a href="https://plot.ly/~jdhiggins/41/leed-projects-1558-681-leed-projects-681-484-leed-projects-505-267-leed-projects/"&gt;https://plot.ly/~jdhiggins/41/leed-projects-1558-681-leed-projects-681-484-leed-projects-505-267-leed-projects/&lt;/a&gt;&lt;/p&gt;</content:encoded></item><item><title>Weekend Work</title><description>&lt;p&gt;After successfully scraping over 7000 individual scoresheets from the LEED site, we set to work getting our api ready for the display of score information and analysis.&lt;/p&gt;
 
 &lt;p&gt;We believe that we are the first to do a public analysis of individual scoresheets for LEED.  There should be many interesting findings.&lt;/p&gt;</description><link>http://localhost:2368/weekend-work/</link><guid isPermaLink="false">c11a1fe1-2eb3-4623-b56c-5b7c90e55565</guid><dc:creator>josh higgins</dc:creator><pubDate>Mon, 13 Jul 2015 15:09:43 GMT</pubDate><content:encoded>&lt;p&gt;After successfully scraping over 7000 individual scoresheets from the LEED site, we set to work getting our api ready for the display of score information and analysis.&lt;/p&gt;
 
